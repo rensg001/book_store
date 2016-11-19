@@ -87,3 +87,24 @@ ENV/
 
 # Rope project settings
 .ropeproject
+
+# add by rsg @2016-10-02
+# PyCharm
+.idea/
+
+# setup.py
+*.egg-info
+
+# MySQL Workbench temp file
+*.mwb.bak
+
+# generate from git merge tools
+*.orig
+
+# 上传文件
+uploads/
+
+# node相关
+node_modules/
+package.json
+Gruntfile.js
