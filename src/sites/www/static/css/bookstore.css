@@ -1,1 +1,14 @@
-.btn{color:#009998}
+.footer {
+    width: 100%;
+    min-height: 60px;
+    background-color: #555;
+    padding: 20px 0;
+    color: #999;
+    margin-top: 20px;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    text-align: center;
+}
+

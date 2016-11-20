@@ -12,12 +12,6 @@ from sites.www.routes import handlers
 from tornado_jinja2 import Jinja2Loader
 
 
-
-class MainHandler(tornado.web.RequestHandler):
-    def get(self):
-        self.write("Hello, world")
-
-
 def make_app():
     template_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "templates")
     # Create a instance of Jinja2Loader
@@ -27,7 +21,6 @@ def make_app():
     settings = {
         "debug": True,
         "login_url": "/",
-        # "template_path": os.path.join(os.path.dirname(os.path.abspath(__file__)), "templates"),
         "static_path": os.path.join(os.path.dirname(os.path.abspath(__file__)), "static"),
         "template_loader": jinja2_loader
     }
