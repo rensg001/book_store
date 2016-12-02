@@ -1,12 +1,6 @@
 /**
  * Created by renshangui on 16/11/27.
  */
-//    function get_login_form_data() {
-//        var login_form = $("#login_form");
-//        var name = login_form.find("input[name='name']").val();
-//        var passwd = login_form.find("input[password='passwd']").val();
-//    }
-//    var login_data = get_login_form_data();
 
 function get_signup_form_data() {
     var data = {};
@@ -37,7 +31,6 @@ $(function () {
         format: 'yyyy-mm-dd'
     });
 
-    var url = $("#signupform").attr("action");
-    wrap_ajax_on_btn("btn-signup", "POST", url, get_signup_form_data);
+    $(".btn-submit").click(post_form);
 });
 

@@ -1,0 +1,40 @@
+/**
+ * Created by renshangui on 16/12/3.
+ * 表单提交工具
+ */
+
+
+jQuery.fn.formToDict = function() {
+    var fields = this.serializeArray();
+    var json = {};
+    for (var i = 0; i < fields.length; i++) {
+        if(!fields[i].name.startsWith("_")){
+            json[fields[i].name] = fields[i].value;
+        }
+    }
+    return json;
+};
+
+function post_form(){
+    var form = $(this).parents("form");
+    var args = form.formToDict();
+    $.ajax({
+        url: form.attr("action"),
+        data: args,
+        method: "POST",
+        success: function(resp){
+            //check attributes
+            if (typeof resp === "object" && resp !== null && !resp.success){
+                if(!resp.success){
+                    // show error message on modal
+                    var modal_msg = $(".modal_msg");
+                    modal_msg.find(".modal_msg_body").text(resp.message);
+                    modal_msg.modal("show");
+                }else{
+                    // replace page
+                    $("body").html(resp);
+                }
+            }
+        }
+    })
+}
