@@ -2,27 +2,35 @@
 <html>
 <head lang="en">
     <meta charset="UTF-8">
-    {%block head%}
+    {% block head %}
     <title>我的书店</title>
-    {%endblock%}
-    <link href="{{static_url('bootstrap/css/bootstrap.min.css')}}" rel="stylesheet">
-    <link href="{{static_url('css/bookstore.css')}}" rel="stylesheet">
+    {% endblock %}
+    <link href="{{ static_url('bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
+    <link href="{{ static_url('css/bookstore.css') }}" rel="stylesheet">
+    <link href="{{static_url('css/bootstrap-datetimepicker.min.css')}}" rel="stylesheet">
 </head>
 <body>
-
-    {%include "navigation.html"%}
+    {% import "macros/utils.html" as modal_utils %}
+    {% include "navigation.html" %}
 
     <div class="container" id="content">
-        {%block content%}
-        {%endblock%}
+        {% block content %}
+        {% endblock %}
     </div>
 
-    {%include "footer.html"%}
-
+    {% include "footer.html" %}
+    {{ modal_utils.modal_msg(title="系统消息", id="modal_msg", msg="", labelledby="system_msg") }}
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="http://cdn.bootcss.com/jquery/1.11.1/jquery.min.js"></script>
+    <!--<script src="{{ static_url('js/jquery-1.11.3.min.js') }}"></script>-->
     <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src="{{static_url('bootstrap/js/bootstrap.min.js')}}"></script>
+    <script src="{{ static_url('bootstrap/js/bootstrap.min.js') }}"></script>
+    <script src="{{static_url('js/bootstrap-datetimepicker.js')}}" charset="UTF-8"></script>
+    <script src="{{static_url('js/locales/bootstrap-datetimepicker.zh-CN.js')}}" charset="UTF-8"></script>
+    <script src="{{ static_url('js/message.js') }}"></script>
+    <script src="{{ static_url('js/signin.js') }}"></script>
+    {% block javascript %}
+    {% endblock%}
 
 </body>
 </html>

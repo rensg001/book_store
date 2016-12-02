@@ -4,11 +4,12 @@
 # Author rsg
 #
 from tornado.web import URLSpec as url
-from sites.www.handlers import login, main, other
+from sites.www.handlers import user, main, other
 
 handlers = [
     url(r"/", main.MainHandler),
-    url(r"/login", login.LoginHandler),
-    url(r"/about", other.AboutHandler),
+    url(r"/signup", user.SignUpHandler, name="signup"),
+    url(r"/login", user.LoginHandler, name="login"),
+    url(r"/about", other.AboutHandler, name="about"),
     url(r"/test", other.TestHandler)
 ]

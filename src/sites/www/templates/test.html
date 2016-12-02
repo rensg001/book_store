@@ -4,46 +4,206 @@
     <meta charset="UTF-8">
     <title></title>
     <link href="{{static_url('bootstrap/css/bootstrap.min.css')}}" rel="stylesheet">
+    <!--<link href="{{static_url('css/datetimepicker.css')}}" rel="stylesheet">-->
+    <!--<link href="{{static_url('css/bootstrap-datetimepicker.min.css')}}" rel="stylesheet">-->
+    <style>
+/*.modal-open .modal {*/
+    /*overflow-x: hidden;*/
+    /*overflow-y: auto;*/
+/*}*/
+.modal {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 1050;
+    display: none;
+    overflow: hidden;
+    -webkit-overflow-scrolling: touch;
+    outline: 0;
+
+}
+/** {*/
+    /*-webkit-box-sizing: border-box;*/
+    /*-moz-box-sizing: border-box;*/
+    /*box-sizing: border-box;*/
+/*}*/
+/*:focus {*/
+    /*outline: -webkit-focus-ring-color auto 5px;*/
+/*}*/
+
+/*div {*/
+    /*display: block;*/
+/*}*/
+
+/*body {*/
+    /*font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;*/
+    /*font-size: 14px;*/
+    /*line-height: 1.42857143;*/
+    /*color: #333;*/
+    /*background-color: #fff;*/
+/*}*/
+/*html {*/
+    /*font-size: 10px;*/
+    /*-webkit-tap-highlight-color: rgba(0,0,0,0);*/
+    /*font-family: sans-serif;*/
+    /*-webkit-text-size-adjust: 100%;*/
+    /*-ms-text-size-adjust: 100%;*/
+/*}*/
+/*:after, :before {*/
+    /*-webkit-box-sizing: border-box;*/
+    /*-moz-box-sizing: border-box;*/
+    /*box-sizing: border-box;*/
+/*}*/
+    </style>
 </head>
 <body>
+
 <!-- Button trigger modal -->
-<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
-    Launch demo modal
+<button type="button" class="btn btn-primary btn-md" data-toggle="modal" data-target="#myModal">
+  Launch demo modal
 </button>
 
 <!-- Modal -->
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span
-                        class="sr-only">Close</span></button>
-                <h4 class="modal-title" id="myModalLabel">login to mysite.</h4>
-            </div>
-            <div class="modal-body">
-                <form method="post" action='' name="login_form">
-                    <p><input type="text" class="span3" name="eid" id="email" placeholder="Email"></p>
-
-                    <p><input type="password" class="span3" name="passwd" placeholder="Password"></p>
-
-                    <p>
-                        <button type="submit" class="btn btn-primary">Sign in</button>
-                        <a href="#">Forgot Password?</a>
-                    </p>
-                </form>
-            </div>
-            <div class="modal-footer">
-                New To MyWebsite.com?
-                <a href="#" class="btn btn-primary">Register</a>
-            </div>
-        </div>
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-body">
+          <div>
+          <input>
+          </div>
+          <div>
+          <input>
+          </div>
+          <div>
+          <input>
+          </div>
+          <div>
+          <input>
+          </div>
+          <div>
+          <input>
+          </div>
+          <div>
+          <input>
+          </div>
+          v
+          v
+          <div>
+          <input>
+          </div>
+          <div>
+          <input>
+          </div>
+          <div>
+          <input>
+          </div>
+          v
+          <div>
+          <input>
+          </div>
+          <div>
+          <input>
+          </div>
+          v
+          <div>
+          <input>
+          </div>
+          v
+          <div>
+          <input>
+          </div>
+        <select multiple size="30" class="form-control">
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+            <option>5</option>
+            <option>6</option>
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+            <option>5</option>
+            <option>6</option>
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+            <option>5</option>
+            <option>6</option>
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+            <option>5</option>
+            <option>6</option>
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+            <option>5</option>
+            <option>6</option>
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+            <option>5</option>
+            <option>6</option>
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+            <option>5</option>
+            <option>6</option>
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+            <option>5</option>
+            <option>6</option>
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+            <option>5</option>
+            <option>6</option>
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+            <option>5</option>
+            <option>6</option>
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+            <option>5</option>
+            <option>6</option>
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+            <option>5</option>
+            <option>6</option>
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+            <option>5</option>
+            <option>6</option>
+        </select>
+      </div>
     </div>
+  </div>
 </div>
 
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 <script src="http://cdn.bootcss.com/jquery/1.11.1/jquery.min.js"></script>
 <!-- Include all compiled plugins (below), or include individual files as needed -->
 <script src="{{static_url('bootstrap/js/bootstrap.min.js')}}"></script>
-
+<!--<script src="{{static_url('js/bootstrap-datetimepicker.js')}}" charset="UTF-8"></script>-->
+<!--<script src="{{static_url('js/locales/bootstrap-datetimepicker.zh-CN.js')}}" charset="UTF-8"></script>-->
 </body>
 </html>
