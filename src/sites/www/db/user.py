@@ -8,6 +8,8 @@
 """
 from awesome.db.base import book_store_db
 from awesome.db.user import UserModel, UserInfoModel, UserAddressModel
+from awesome.utils.database import Convert
+from service.user_info import UserAccountInfo
 
 
 class UserRepository(object):
@@ -45,7 +47,31 @@ class UserRepository(object):
             user_id = user_model.user_id
         return user_id
 
+    def update_account(self, user_account_info):
+        with book_store_db.session as session:
+            user = session.query(UserModel).get(user_account_info.user_id)
+            user.login_id = user_account_info.login_id
+            user.password = user_account_info.password
+            user.salt = user_account_info.salt
+            user.retry = user_account_info.retry
+            user.first_login = user_account_info.first_login
+            user.last_login = user_account_info.last_login
+            user.update_time = user_account_info.update_time
+            user.create_time = user_account_info.create_time
+            user.is_valid = user_account_info.is_valid
+            session.commit()
+
     def get_by_id(self, user_id):
         with book_store_db.session as session:
             user = session.query(UserModel).get(UserModel.user_id == user_id)
-        return user
+            convert = Convert(user, UserAccountInfo)
+        return convert.convert()
+
+    def get_by_login_id(self, login_id):
+        with book_store_db.session as session:
+            user = session.query(UserModel)\
+                .filter(UserModel.login_id == login_id)\
+                .filter(UserModel.is_valid) \
+                .first()
+            convert = Convert(user, UserAccountInfo)
+        return convert.convert()

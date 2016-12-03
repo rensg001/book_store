@@ -3,14 +3,9 @@
 #
 # Author rsg
 #
-from Crypto.Cipher import AES
+from awesome.handler import BaseRequestHandler
 from tornado.options import options
-from tornado.web import RequestHandler
 from service.user import UserService
-
-
-class BaseRequestHandler(RequestHandler):
-    pass
 
 
 class UserRequestHandler(BaseRequestHandler):

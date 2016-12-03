@@ -47,4 +47,4 @@ class PasswordHash(object):
         sha256 = SHA256.new()
         sha256.update(password)
         sha256.update(salt)
-        return sha256.digest() == password_hash
+        return sha256.hexdigest() == password_hash

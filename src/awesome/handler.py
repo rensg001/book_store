@@ -3,6 +3,14 @@
 #
 # Author rsg
 #
+import os
+from datetime import datetime
+
+from awesome.errors import ERROR_MAP, ErrorEnum
+from awesome.exceptions import UndefinedError
+from awesome.utils.random_str import random_word
+from tornado.options import options
+from tornado.web import RequestHandler
 
 
 class ResultBase(dict):
@@ -16,7 +24,7 @@ class ResultBase(dict):
         super(ResultBase, self).__init__(*args, **kwargs)
 
 
-class MessageResult(dict):
+class MessageResult(ResultBase):
     def __init__(self, message="", *args, **kwargs):
         if not isinstance(message, str):
             raise ValueError("argument data must be type of str.")
@@ -33,10 +41,60 @@ class SuccessMSGResult(MessageResult):
         super(SuccessMSGResult, self).__init__(*args, **kwargs)
 
 
+class ErrorMSGResult(MessageResult):
+    def __init__(self, *args, **kwargs):
+        kwargs.update(success=False)
+        super(MessageResult, self).__init__(*args, **kwargs)
+
+
 class DataResult(dict):
-    def __init__(self, data, *args, **kwargs):
+    def __init__(self, data, code=0, success=True, *args, **kwargs):
         if not isinstance(data, dict):
             raise ValueError("argument data must be type of dict.")
 
         kwargs.update(data=data)
+        kwargs.update(code=code)
+        kwargs.update(success=success)
         super(DataResult, self).__init__(*args, **kwargs)
+
+
+class BaseRequestHandler(RequestHandler):
+    def write_error_msg(self, code: int, msg=None):
+        if not msg:
+            error_msg = ERROR_MAP.get(code)
+            if not error_msg:
+                raise UndefinedError(code)
+        else:
+            error_msg = msg
+        return self.write(ErrorMSGResult(message=error_msg, code=code))
+
+    def write_success(self):
+        self.write(SuccessMSGResult())
+
+    def write_data(self, data):
+        self.write(DataResult(data=data))
+
+
+class FileUploadHandler(BaseRequestHandler):
+    def post(self):
+        if not self.request.files:
+            return self.write_error_msg(code=ErrorEnum.argument_error.value,
+                                        msg="缺少文件参数")
+
+        file = self.request.files["fileupload"][0]
+        filename, file_extension = os.path.splitext(file["filename"])
+        today = datetime.today()
+        filename = random_word(20)
+        relative_path = today.strftime("%Y/%m/%d")
+        fullname = filename+file_extension
+        path = os.path.join(options.FILE_UPLOAD_ROOT, relative_path)
+        if not os.path.exists(path):
+            os.makedirs(path)
+        relative_path = os.path.join(relative_path, fullname)
+        filepath = os.path.join(path, fullname)
+        with open(filepath, mode="wb") as f:
+            try:
+                f.write(file["body"])
+            except IOError:
+                raise
+        return self.write_data({"filepath": relative_path})

@@ -16,12 +16,12 @@
 
                         <div style="display:none" id="login-alert" class="alert alert-danger col-sm-12"></div>
 
-                        <form id="loginform" class="form-horizontal" role="form">
+                        <form id="loginform" class="form-horizontal" role="form" action="{{ reverse_url('login') }}">
 
                             <div style="margin-bottom: 25px" class="input-group">
                                 <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                                <input id="login-username" type="text" class="form-control" name="username" value=""
-                                       placeholder="登陆名称或邮箱">
+                                <input id="login-username" type="text" class="form-control" name="login_id" value=""
+                                       placeholder="登陆ID">
                             </div>
 
                             <div style="margin-bottom: 25px" class="input-group">
@@ -45,7 +45,7 @@
                                 <!-- Button -->
 
                                 <div class="col-sm-12 controls">
-                                    <a id="btn-login" href="#" class="btn btn-success">登陆 </a>
+                                    <a id="btn-login" href="#" class="btn btn-success btn-submit">登陆 </a>
                                     <a id="btn-fblogin" href="#" class="btn btn-primary">QQ登陆</a>
 
                                 </div>
@@ -173,6 +173,14 @@
 
                                 <div class="col-md-9">
                                     <input type="text" class="form-control" name="address" placeholder="住址">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-md-3 control-label">上传头像</label>
+
+                                <div class="col-md-9">
+                                    <input name="fileupload" multiple type="file" class="file file-loading" data-allowed-file-extensions='["jpg", "png", "jpeg", "gif"]'>
                                 </div>
                             </div>
 

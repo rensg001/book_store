@@ -5,7 +5,7 @@
 #
 
 
-class UserInfoV(object):
+class UserSignupInfo(object):
     def __init__(self,
                  user_id,
                  login_id,
@@ -27,7 +27,15 @@ class UserInfoV(object):
         self.address = address
 
 
-class UserInfoM(object):
+class UserLoginInfo(object):
+    def __init__(self,
+                 login_id,
+                 password):
+        self.login_id = login_id
+        self.password = password
+
+
+class UserCreateInfo(object):
     def __init__(self,
                  user_id,
                  login_id,
@@ -61,3 +69,27 @@ class UserInfoM(object):
         self.nickname = nickname
         self.birthday = birthday
         self.address = address
+
+
+class UserAccountInfo(object):
+    def __init__(self,
+                 user_id,
+                 login_id,
+                 password,
+                 salt,
+                 retry,
+                 first_login,
+                 last_login,
+                 update_time,
+                 create_time,
+                 is_valid):
+        self.user_id = user_id
+        self.login_id = login_id
+        self.password = password
+        self.salt = salt
+        self.retry = retry
+        self.first_login = first_login
+        self.last_login = last_login
+        self.update_time = update_time
+        self.create_time = create_time
+        self.is_valid = is_valid

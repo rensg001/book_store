@@ -24,16 +24,21 @@ function post_form(){
         method: "POST",
         success: function(resp){
             //check attributes
-            if (typeof resp === "object" && resp !== null && !resp.success){
+            if (typeof resp === "object" && resp !== null){
+                var modal_msg = $(".modal_msg");
                 if(!resp.success){
                     // show error message on modal
-                    var modal_msg = $(".modal_msg");
                     modal_msg.find(".modal_msg_body").text(resp.message);
                     modal_msg.modal("show");
                 }else{
-                    // replace page
-                    $("body").html(resp);
+                    modal_msg.find(".modal_msg_body").text("操作成功");
+                    modal_msg.modal("show");
+                    setTimeout(location.reload.bind(location), 2000);
                 }
+            }else{
+                // replace page
+                $("body").html(resp);
+
             }
         }
     })

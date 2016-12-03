@@ -6,11 +6,8 @@
 """
 用户表数据库模型
 """
-
-from sqlalchemy.ext.declarative import declarative_base
+from awesome.db.base import Base
 from sqlalchemy import Column, Integer, String, SmallInteger, DateTime, Date, Boolean
-
-Base = declarative_base()
 
 
 class UserModel(Base):

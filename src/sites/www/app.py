@@ -20,14 +20,15 @@ def make_app():
     jinja2_env = jinja2.Environment(loader=jinja2.FileSystemLoader(template_path), autoescape=False)
     jinja2_loader = Jinja2Loader(jinja2_env)
 
+    # 读取应用配置
+    read_config_file(config_path)
     settings = {
         "debug": True,
         "login_url": "/",
         "static_path": os.path.join(os.path.dirname(os.path.abspath(__file__)), "static"),
-        "template_loader": jinja2_loader
+        "template_loader": jinja2_loader,
+        "cookie_secret": tornado.options.options.COOKIE_SECRETE
     }
-    # 读取应用配置
-    read_config_file(config_path)
     from sites.www.routes import handlers
     return tornado.web.Application(handlers, **settings)
 

@@ -3,6 +3,7 @@
 #
 # Author rsg
 #
+from sqlalchemy.ext.declarative import declarative_base
 from tornado.options import options
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
@@ -56,3 +57,5 @@ class BookStoreDB(object):
         return getattr(self, "_book_store")
 
 book_store_db = BookStoreDB().book_store_db
+
+Base = declarative_base()

@@ -102,7 +102,7 @@ ENV/
 *.orig
 
 # 上传文件
-uploads/
+upload/
 
 # node相关
 node_modules/
