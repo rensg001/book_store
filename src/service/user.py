@@ -4,10 +4,11 @@
 # Author rsg
 #
 from datetime import datetime
+
 from awesome.errors import ErrorEnum
 from awesome.utils.password import PasswordHash
 from service.user_info import UserCreateInfo, UserSignupInfo, UserLoginInfo
-from sites.www.db.user import UserRepository
+from db.user import UserRepository
 
 
 class UserService(object):
@@ -33,11 +34,12 @@ class UserService(object):
                                      name=user_info_v.name,
                                      nickname=user_info_v.nickname,
                                      birthday=user_info_v.birthday,
-                                     address=user_info_v.address)
+                                     address=user_info_v.address,
+                                     avatar=user_info_v.avatar)
         return self.user_repository.create(user_info_m)
 
-    def get_by_id(self, user_id):
-        return self.user_repository.get_by_id(user_id)
+    def get_profile_by_id(self, user_id):
+        return self.user_repository.get_profile_by_id(user_id)
 
     def login(self, user_login_info: UserLoginInfo):
         user = self.user_repository.get_by_login_id(user_login_info.login_id)
@@ -57,4 +59,4 @@ class UserService(object):
             user.first_login = now
         user.last_login = now
         self.user_repository.update_account(user)
-        return ErrorEnum.success.value
+        return user.user_id

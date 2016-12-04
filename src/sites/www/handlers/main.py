@@ -3,9 +3,9 @@
 #
 # Author rsg
 #
-import tornado.web
+from sites.www.handlers.handler import UserRequestHandler
 
 
-class MainHandler(tornado.web.RequestHandler):
+class MainHandler(UserRequestHandler):
     def get(self):
         self.render("/index.html")

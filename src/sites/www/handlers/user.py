@@ -13,12 +13,12 @@ from tornado.options import options
 
 
 class LoginHandler(BaseRequestHandler):
-
     def post(self):
         form = UserLoginForm(self.request.arguments)
         if not form.validate():
             return self.write_error_msg(code=ErrorEnum.argument_error.value,
                                         msg=form.first_error)
+        self.clear_all_cookies()
         login_info = UserLoginInfo(login_id=form.login_id.data,
                                    password=form.password.data)
         login_ret = UserService().login(login_info)
@@ -30,12 +30,19 @@ class LoginHandler(BaseRequestHandler):
         return self.write_success()
 
 
+class LogoutHandler(BaseRequestHandler):
+    def get(self):
+        self.clear_all_cookies()
+        return self.write_success()
+
+
 class SignUpHandler(BaseRequestHandler):
     def post(self):
         form = UserSignUpForm(self.request.arguments)
         if not form.validate():
             return self.write_error_msg(code=ErrorEnum.argument_error.value,
                                         msg=form.first_error)
+        self.clear_all_cookies()
         user_info_v = UserSignupInfo(user_id=0,
                                      login_id=form.login_id.data,
                                      password=form.password.data,
@@ -44,6 +51,10 @@ class SignUpHandler(BaseRequestHandler):
                                      name=form.name.data,
                                      nickname=form.nickname.data,
                                      birthday=form.birthday.data,
-                                     address=form.address.data)
-        UserService().create(user_info_v)
+                                     address=form.address.data,
+                                     avatar=form.avatar.data)
+        user_id = UserService().create(user_info_v)
+        self.set_secure_cookie(name=options.USER_COOKIE_NAME,
+                               value="{0}".format(user_id),
+                               expires_days=None)
         return self.write(SuccessMSGResult())

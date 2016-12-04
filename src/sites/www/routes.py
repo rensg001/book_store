@@ -11,6 +11,7 @@ handlers = [
     url(r"/", main.MainHandler),
     url(r"/signup", user.SignUpHandler, name="signup"),
     url(r"/login", user.LoginHandler, name="login"),
+    url(r"/logout", user.LogoutHandler, name="logout"),
     url(r"/about", other.AboutHandler, name="about"),
     url(r"/file/upload", FileUploadHandler, name="file_upload"),
     url(r"/test", other.TestHandler)

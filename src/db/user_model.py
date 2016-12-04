@@ -6,7 +6,7 @@
 """
 用户表数据库模型
 """
-from awesome.db.base import Base
+from db.base import Base
 from sqlalchemy import Column, Integer, String, SmallInteger, DateTime, Date, Boolean
 
 
@@ -34,6 +34,7 @@ class UserInfoModel(Base):
     birthday = Column(Date, nullable=True)
     update_time = Column(DateTime, nullable=False)
     create_time = Column(DateTime, nullable=False)
+    avatar = Column(String(128), nullable=False)
 
 
 class UserAddressModel(Base):

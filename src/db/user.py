@@ -6,10 +6,10 @@
 """
 用户数据库操作
 """
-from awesome.db.base import book_store_db
-from awesome.db.user import UserModel, UserInfoModel, UserAddressModel
 from awesome.utils.database import Convert
-from service.user_info import UserAccountInfo
+from db.base import book_store_db
+from db.user_model import UserModel, UserInfoModel, UserAddressModel
+from service.user_info import UserAccountInfo, UserProfileInfo
 
 
 class UserRepository(object):
@@ -33,7 +33,8 @@ class UserRepository(object):
                                             mobile=user_info.mobile,
                                             birthday=user_info.birthday,
                                             update_time=user_info.update_time,
-                                            create_time=user_info.create_time)
+                                            create_time=user_info.create_time,
+                                            avatar=user_info.avatar)
             if user_info.address:
                 user_address_model = UserAddressModel(user_id=user_model.user_id,
                                                       address=user_info.address,
@@ -61,16 +62,18 @@ class UserRepository(object):
             user.is_valid = user_account_info.is_valid
             session.commit()
 
-    def get_by_id(self, user_id):
+    def get_profile_by_id(self, user_id):
         with book_store_db.session as session:
-            user = session.query(UserModel).get(UserModel.user_id == user_id)
-            convert = Convert(user, UserAccountInfo)
+            user = session.query(UserInfoModel) \
+                .filter(UserInfoModel.user_id == user_id) \
+                .first()
+            convert = Convert(user, UserProfileInfo)
         return convert.convert()
 
     def get_by_login_id(self, login_id):
         with book_store_db.session as session:
-            user = session.query(UserModel)\
-                .filter(UserModel.login_id == login_id)\
+            user = session.query(UserModel) \
+                .filter(UserModel.login_id == login_id) \
                 .filter(UserModel.is_valid) \
                 .first()
             convert = Convert(user, UserAccountInfo)

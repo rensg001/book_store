@@ -1,218 +1,221 @@
 <!-- Login Modal -->
 <div class="modal fade" id="SignInModal" tabindex="-1" role="dialog" aria-labelledby="SignInModalLabel"
      aria-hidden="true">
-<div class="modal-dialog">
-    <div class="modal-content">
-        <div class="modal-body">
-            <div id="loginbox" class="mainbox">
-                <div class="panel panel-info">
-                    <div class="panel-heading">
-                        <div class="panel-title">登陆</div>
-                        <div style="float:right; font-size: 80%; position: relative; top:-10px"><a
-                                href="#">忘记密码?</a></div>
-                    </div>
-
-                    <div style="padding-top:30px" class="panel-body">
-
-                        <div style="display:none" id="login-alert" class="alert alert-danger col-sm-12"></div>
-
-                        <form id="loginform" class="form-horizontal" role="form" action="{{ reverse_url('login') }}">
-
-                            <div style="margin-bottom: 25px" class="input-group">
-                                <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                                <input id="login-username" type="text" class="form-control" name="login_id" value=""
-                                       placeholder="登陆ID">
-                            </div>
-
-                            <div style="margin-bottom: 25px" class="input-group">
-                                <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-                                <input id="login-password" type="password" class="form-control" name="password"
-                                       placeholder="密码">
-                            </div>
-
-
-                            <div class="input-group">
-                                <div class="checkbox">
-                                    <label>
-                                        <input id="login-remember" type="checkbox" name="remember" value="1">
-                                        记住我
-                                    </label>
-                                </div>
-                            </div>
-
-
-                            <div style="margin-top:10px" class="form-group">
-                                <!-- Button -->
-
-                                <div class="col-sm-12 controls">
-                                    <a id="btn-login" href="#" class="btn btn-success btn-submit">登陆 </a>
-                                    <a id="btn-fblogin" href="#" class="btn btn-primary">QQ登陆</a>
-
-                                </div>
-                            </div>
-
-
-                            <div class="form-group">
-                                <div class="col-md-12 control">
-                                    <div style="border-top: 1px solid#888; padding-top:15px; font-size:85%">
-                                        没有帐号!
-                                        <a href="#" onClick="$('#loginbox').hide(); $('#signupbox').show()">
-                                            在这儿注册
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </form>
-
-
-                    </div>
-                </div>
-            </div>
-
-            <div id="signupbox" style="display:none;"
-                 class="mainbox">
-                <div class="panel panel-info">
-                    <div class="panel-heading">
-                        <div class="panel-title">注册</div>
-                        <div style="float:right; font-size: 85%; position: relative; top:-10px">
-                            <a id="signinlink" href="#"
-                               onclick="$('#signupbox').hide(); $('#loginbox').show()">登陆</a>
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div id="loginbox" class="mainbox">
+                    <div class="panel panel-info">
+                        <div class="panel-heading">
+                            <div class="panel-title">登陆</div>
+                            <div style="float:right; font-size: 80%; position: relative; top:-10px"><a
+                                    href="#">忘记密码?</a></div>
                         </div>
-                    </div>
-                    <div class="panel-body">
-                        <form id="signupform" class="form-horizontal" role="form" action="{{ reverse_url('signup') }}">
 
-                            <div id="signupalert" style="display:none" class="alert alert-danger">
-                                <p>Error:</p>
-                                <span></span>
-                            </div>
+                        <div style="padding-top:30px" class="panel-body">
 
-                            <div class="form-group">
-                                <label for="login_id" class="col-md-3 control-label">用户ID</label>
+                            <div style="display:none" id="login-alert" class="alert alert-danger col-sm-12"></div>
 
-                                <div class="col-md-9">
-                                    <input type="text" class="form-control" name="login_id"
-                                           placeholder="用户ID">
+                            <form id="loginform" class="form-horizontal" role="form"
+                                  action="{{ reverse_url('login') }}">
+
+                                <div style="margin-bottom: 25px" class="input-group">
+                                    <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                                    <input id="login-username" type="text" class="form-control" name="login_id" value=""
+                                           placeholder="登陆ID">
                                 </div>
-                            </div>
 
-                            <div class="form-group">
-                                <label for="password" class="col-md-3 control-label">密码</label>
-
-                                <div class="col-md-9">
-                                    <input type="password" class="form-control" name="password"
+                                <div style="margin-bottom: 25px" class="input-group">
+                                    <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+                                    <input id="login-password" type="password" class="form-control" name="password"
                                            placeholder="密码">
                                 </div>
-                            </div>
 
-                            <div class="form-group">
-                                <label for="email" class="col-md-3 control-label">邮箱</label>
 
-                                <div class="col-md-9">
-                                    <input type="text" class="form-control" name="email"
-                                           placeholder="邮箱地址">
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="name" class="col-md-3 control-label">姓名</label>
-
-                                <div class="col-md-9">
-                                    <input type="text" class="form-control" name="name"
-                                           placeholder="姓名">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="nickname" class="col-md-3 control-label">昵称</label>
-
-                                <div class="col-md-9">
-                                    <input type="text" class="form-control" name="nickname" placeholder="昵称">
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="mobile" class="col-md-3 control-label">手机号</label>
-
-                                <div class="col-md-9">
-                                    <input type="text" class="form-control" name="mobile" placeholder="手机号">
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="gender" class="col-md-3 control-label">性别</label>
-
-                                <div class="col-md-9">
-                                    <label class="radio-inline">
-                                        <input type="radio" name="gender" id="inlineRadio1"
-                                               value="男"> 男
-                                    </label>
-                                    <label class="radio-inline">
-                                        <input type="radio" name="gender" id="inlineRadio2"
-                                               value="女"> 女
-                                    </label>
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="birthday" class="col-md-3 control-label">出生日期</label>
-
-                                <div class="input-group date form_date col-md-9" style="padding-left: 15px; padding-right: 15px;" data-date=""
-                                     data-date-format="yyyy MM dd" data-link-field="dtp_input2"
-                                     data-link-format="yyyy-mm-dd">
-                                    <input class="form-control" type="text" value="" readonly name="birthday">
-                                    <span class="input-group-addon"><span
-                                            class="glyphicon glyphicon-remove"></span></span>
-                                    <span class="input-group-addon"><span
-                                            class="glyphicon glyphicon-calendar"></span></span>
-                                </div>
-                                <input type="hidden" name="dtp_input2" value=""/><br/>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="address" class="col-md-3 control-label">住址</label>
-
-                                <div class="col-md-9">
-                                    <input type="text" class="form-control" name="address" placeholder="住址">
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <label class="col-md-3 control-label">上传头像</label>
-
-                                <div class="col-md-9">
-                                    <input name="fileupload" multiple type="file" class="file file-loading" data-allowed-file-extensions='["jpg", "png", "jpeg", "gif"]'>
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <!-- Button -->
-                                <div class="col-md-offset-3 col-md-9">
-                                    <button id="btn-signup" type="button" class="btn btn-info btn-submit"><i
-                                            class="icon-hand-right"></i> &nbsp 注册
-                                    </button>
-                                    <span style="margin-left:8px;">or</span>
-                                </div>
-                            </div>
-
-                            <div style="border-top: 1px solid #999; padding-top:20px" class="form-group">
-
-                                <div class="col-md-offset-3 col-md-9">
-                                    <button id="btn-fbsignup" type="button" class="btn btn-primary"><i
-                                            class="icon-facebook"></i>   QQ注册
-                                    </button>
+                                <div class="input-group">
+                                    <div class="checkbox">
+                                        <label>
+                                            <input id="login-remember" type="checkbox" name="remember" value="1">
+                                            记住我
+                                        </label>
+                                    </div>
                                 </div>
 
-                            </div>
+
+                                <div style="margin-top:10px" class="form-group">
+                                    <!-- Button -->
+
+                                    <div class="col-sm-12 controls">
+                                        <a id="btn-login" href="#" class="btn btn-success btn-submit">登陆 </a>
+                                        <a id="btn-fblogin" href="#" class="btn btn-primary">QQ登陆</a>
+
+                                    </div>
+                                </div>
 
 
-                        </form>
+                                <div class="form-group">
+                                    <div class="col-md-12 control">
+                                        <div style="border-top: 1px solid#888; padding-top:15px; font-size:85%">
+                                            没有帐号!
+                                            <a href="#" onClick="$('#loginbox').hide(); $('#signupbox').show()">
+                                                在这儿注册
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+
+
+                        </div>
                     </div>
                 </div>
 
+                <div id="signupbox" style="display:none;"
+                     class="mainbox">
+                    <div class="panel panel-info">
+                        <div class="panel-heading">
+                            <div class="panel-title">注册</div>
+                            <div style="float:right; font-size: 85%; position: relative; top:-10px">
+                                <a id="signinlink" href="#"
+                                   onclick="$('#signupbox').hide(); $('#loginbox').show()">登陆</a>
+                            </div>
+                        </div>
+                        <div class="panel-body">
+                            <form id="signupform" class="form-horizontal" role="form"
+                                  action="{{ reverse_url('signup') }}">
+
+                                <div id="signupalert" style="display:none" class="alert alert-danger">
+                                    <p>Error:</p>
+                                    <span></span>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="login_id" class="col-md-3 control-label">用户ID</label>
+
+                                    <div class="col-md-9">
+                                        <input id="login_id" type="text" class="form-control" name="login_id"
+                                               placeholder="用户ID">
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="password" class="col-md-3 control-label">密码</label>
+
+                                    <div class="col-md-9">
+                                        <input id="password" type="password" class="form-control" name="password"
+                                               placeholder="密码">
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="email" class="col-md-3 control-label">邮箱</label>
+
+                                    <div class="col-md-9">
+                                        <input id="email" type="text" class="form-control" name="email"
+                                               placeholder="邮箱地址">
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="name" class="col-md-3 control-label">姓名</label>
+
+                                    <div class="col-md-9">
+                                        <input id="name" type="text" class="form-control" name="name"
+                                               placeholder="姓名">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="nickname" class="col-md-3 control-label">昵称</label>
+
+                                    <div class="col-md-9">
+                                        <input id="nickname" type="text" class="form-control" name="nickname" placeholder="昵称">
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="mobile" class="col-md-3 control-label">手机号</label>
+
+                                    <div class="col-md-9">
+                                        <input id="mobile" type="text" class="form-control" name="mobile" placeholder="手机号">
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="gender" class="col-md-3 control-label">性别</label>
+
+                                    <div class="col-md-9">
+                                        <label class="radio-inline">
+                                            <input type="radio" name="gender" id="inlineRadio1"
+                                                   value="男"> 男
+                                        </label>
+                                        <label class="radio-inline">
+                                            <input type="radio" name="gender" id="inlineRadio2"
+                                                   value="女"> 女
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="birthday" class="col-md-3 control-label">出生日期</label>
+
+                                    <div class="input-group date form_date col-md-9"
+                                         style="padding-left: 15px; padding-right: 15px;" data-date=""
+                                         data-date-format="yyyy MM dd" data-link-field="dtp_input2"
+                                         data-link-format="yyyy-mm-dd">
+                                        <input id="birthday" class="form-control" type="text" value="" readonly name="birthday">
+                                        <span class="input-group-addon"><span
+                                                class="glyphicon glyphicon-remove"></span></span>
+                                        <span class="input-group-addon"><span
+                                                class="glyphicon glyphicon-calendar"></span></span>
+                                    </div>
+                                    <input type="hidden" name="dtp_input2" value=""/><br/>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="address" class="col-md-3 control-label">住址</label>
+
+                                    <div class="col-md-9">
+                                        <input id="address" type="text" class="form-control" name="address" placeholder="住址">
+                                    </div>
+                                </div>
+
+                                <div class="form-group text-center">
+                                    <label for="input-avatar" class="col-md-3 control-label">头像</label>
+                                    <div class="kv-avatar center-block col-md-9" style="width:200px">
+                                        <input id="input-avatar" name="fileupload" type="file" class="file-loading">
+                                    </div>
+                                    <input type="hidden" name="avatar">
+                                </div>
+
+                                <div class="form-group">
+                                    <!-- Button -->
+                                    <div class="col-md-offset-3 col-md-9">
+                                        <button id="btn-signup" type="button" class="btn btn-info btn-submit"><i
+                                                class="icon-hand-right"></i> &nbsp 注册
+                                        </button>
+                                        <span style="margin-left:8px;">or</span>
+                                    </div>
+                                </div>
+
+                                <div style="border-top: 1px solid #999; padding-top:20px" class="form-group">
+
+                                    <div class="col-md-offset-3 col-md-9">
+                                        <button id="btn-fbsignup" type="button" class="btn btn-primary"><i
+                                                class="icon-facebook"></i>   QQ注册
+                                        </button>
+                                    </div>
+
+                                </div>
+
+
+                            </form>
+                        </div>
+                    </div>
+
+
+                </div>
 
             </div>
-
         </div>
     </div>
-</div>
 </div>

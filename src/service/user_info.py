@@ -15,7 +15,8 @@ class UserSignupInfo(object):
                  name,
                  nickname,
                  birthday,
-                 address):
+                 address,
+                 avatar):
         self.user_id = user_id
         self.login_id = login_id
         self.password = password
@@ -25,6 +26,7 @@ class UserSignupInfo(object):
         self.nickname = nickname
         self.birthday = birthday
         self.address = address
+        self.avatar = avatar
 
 
 class UserLoginInfo(object):
@@ -52,7 +54,8 @@ class UserCreateInfo(object):
                  name,
                  nickname,
                  birthday,
-                 address):
+                 address,
+                 avatar):
         self.user_id = user_id
         self.login_id = login_id
         self.password = password
@@ -69,6 +72,7 @@ class UserCreateInfo(object):
         self.nickname = nickname
         self.birthday = birthday
         self.address = address
+        self.avatar = avatar
 
 
 class UserAccountInfo(object):
@@ -93,3 +97,26 @@ class UserAccountInfo(object):
         self.update_time = update_time
         self.create_time = create_time
         self.is_valid = is_valid
+
+
+class UserProfileInfo(object):
+    def __init__(self,
+                 user_id,
+                 gender,
+                 mobile,
+                 name,
+                 nickname,
+                 birthday,
+                 update_time,
+                 create_time,
+                 avatar
+                 ):
+        self.user_id = user_id
+        self.gender = gender
+        self.mobile = mobile
+        self.name = name
+        self.nickname = nickname
+        self.birthday = birthday
+        self.update_time = update_time
+        self.create_time = create_time
+        self.avatar = avatar

@@ -17,6 +17,7 @@ class UserSignUpForm(BaseForm):
     nickname = StringField(validators=[InputRequired(message="昵称不能为空"), Length(max=20, message="昵称不能超过20个字符")])
     mobile = StringField(validators=[InputRequired(message="手机号不能为空"), Length(max=20, message="手机号不能超过20个字符")])
     address = StringField(validators=[Length(max=256, message="地址不能超过256个字符")])
+    avatar = StringField(validators=[InputRequired(message="请上传头像"), Length(max=128, message="头像数据超长")])
 
 
 class UserLoginForm(BaseForm):
