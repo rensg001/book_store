@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>书店后台登陆</title>
+
+    <link href="{{ static_url('bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
+    <link href="{{ static_url('css/login.css') }}" rel="stylesheet">
+</head>
+
+<body>
+
+{% import "macros/utils.html" as utils %}
+{{ utils.modal_msg(title="系统消息", id="modal_msg", msg="", labelledby="system_msg") }}
+
+<div class="container login">
+    <form role="form" action="{{ reverse_url('login') }}" method="post">
+        <div class="form-group form-group-lg">
+            <label for="login_id">帐号</label>
+            <div class="input-group">
+                <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                <input class="form-control" id="login_id" name="login_id" placeholder="管理员ID">
+            </div>
+        </div>
+        <div class="form-group form-group-lg">
+            <label for="password">密码</label>
+            <div class="input-group">
+                <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+                <input type="password" class="form-control" id="password" name="password" placeholder="密码">
+            </div>
+        </div>
+        <button type="button" class="btn btn-success form-control btn-login">登陆</button>
+    </form>
+</div>
+<script src="{{ static_url('js/jquery-1.11.3.min.js') }}"></script>
+<script src="{{ static_url('bootstrap/js/bootstrap.min.js') }}"></script>
+<script src="{{ static_url('js/utils.js') }}"></script>
+<script>
+    $(function () {
+        $(".btn-login").click(post_form)
+    })
+</script>
+</body>
+</html>

@@ -11,7 +11,7 @@
     <link href="{{ static_url('css/bootstrap-fileinput/fileinput.css') }}" rel="stylesheet">
 </head>
 <body>
-    {% import "macros/utils.html" as modal_utils %}
+    {% import "macros/utils.html" as utils %}
     {% include "navigation.html" %}
 
     <div class="container" id="content">
@@ -20,7 +20,7 @@
     </div>
 
     {% include "footer.html" %}
-    {{ modal_utils.modal_msg(title="系统消息", id="modal_msg", msg="", labelledby="system_msg") }}
+    {{ utils.modal_msg(title="系统消息", id="modal_msg", msg="", labelledby="system_msg") }}
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <!--<script src="http://cdn.bootcss.com/jquery/1.11.1/jquery.min.js"></script>-->
     <script src="{{ static_url('js/jquery-1.11.3.min.js') }}"></script>

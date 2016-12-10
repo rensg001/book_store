@@ -44,3 +44,17 @@ class UserAddressModel(Base):
     update_time = Column(DateTime, nullable=False)
     create_time = Column(DateTime, nullable=False)
     is_valid = Column(Boolean, nullable=False, default=True)
+
+
+class Admin(Base):
+    __tablename__ = "admin"
+    admin_id = Column(Integer, primary_key=True, autoincrement=True)
+    login_id = Column(String(64), nullable=False)
+    password = Column(String(64), nullable=False)
+    salt = Column(String(64), nullable=False)
+    retry = Column(SmallInteger, nullable=False, default=0)
+    first_login = Column(DateTime, nullable=True)
+    last_login = Column(DateTime, nullable=True)
+    update_time = Column(DateTime, nullable=False)
+    create_time = Column(DateTime, nullable=False)
+    is_valid = Column(Boolean, nullable=False, default=True)

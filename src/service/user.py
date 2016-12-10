@@ -7,7 +7,7 @@ from datetime import datetime
 
 from awesome.errors import ErrorEnum
 from awesome.utils.password import PasswordHash
-from service.user_info import UserCreateInfo, UserSignupInfo, UserLoginInfo
+from service.user_info import UserCreateInfo, UserSignupInfo, UserLoginInfo, AdminLoginInfo
 from db.user import UserRepository
 
 
@@ -60,3 +60,21 @@ class UserService(object):
         user.last_login = now
         self.user_repository.update_account(user)
         return user.user_id
+
+    def get_admin_by_id(self, admin_id: int):
+        admin = self.user_repository.get_admin_by_id(admin_id)
+        del admin.retry
+        del admin.password
+        del admin.is_valid
+        return admin
+
+    def admin_login(self, admin_login_info: AdminLoginInfo):
+        admin = self.user_repository.get_admin_by_login_id(admin_login_info.login_id)
+        if not admin:
+            return ErrorEnum.login_failure.value
+        equal = PasswordHash.compare(admin_login_info.password,
+                                     admin.salt,
+                                     admin.password)
+        if not equal:
+            return ErrorEnum.login_failure.value
+        return admin.admin_id

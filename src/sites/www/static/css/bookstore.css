@@ -24,3 +24,18 @@
     display: table-cell;
     max-width: 220px;
 }
+
+.pictogram{
+    margin-right: 5px;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.pictogram > img{
+    width: 50px;
+    height: auto;
+}
+
+.blurb{
+    display: inline-block;
+}

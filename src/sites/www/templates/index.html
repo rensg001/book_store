@@ -1,4 +1,12 @@
 {% extends "base.html" %}
+{% import "macros/utils.html" as utils %}
+
 {%block content%}
-        <p>这是我的主页</p>
+        <div class="container">
+                {{ utils.book_cell(blurb="简介", book_name="Python") }}
+        </div>
 {%endblock%}
+
+{% block javascript %}
+
+{% endblock %}

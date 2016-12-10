@@ -1,5 +1,6 @@
 {% macro modal_msg(title="", msg="", id="", labelledby="")%}
-<div class="modal fade modal_msg" id="{{ id }}" tabindex="-1" role="dialog" aria-labelledby="{{ labelledby }}" aria-hidden="true">
+<div class="modal fade modal_msg" id="{{ id }}" tabindex="-1" role="dialog" aria-labelledby="{{ labelledby }}"
+     aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -12,5 +13,20 @@
             </div>
         </div>
     </div>
+</div>
+{%- endmacro %}
+
+
+{% macro book_cell(cover="javascript: void(0);", blurb="", book_name="", href="javascript: void(0);", size=4) %}
+<div class="platform col-md-{{ size }}">
+    <h4>
+        <div class="pictogram">
+            <img src="{{ cover }}" alt="封面">
+        </div>
+        <div class="blurb">
+            <a href="{{ href }}">{{ book_name }}</a>
+            <small>{{ blurb }}</small>
+        </div>
+    </h4>
 </div>
 {%- endmacro %}

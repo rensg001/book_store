@@ -8,8 +8,8 @@
 """
 from awesome.utils.database import Convert
 from db.base import book_store_db
-from db.user_model import UserModel, UserInfoModel, UserAddressModel
-from service.user_info import UserAccountInfo, UserProfileInfo
+from db.user_model import UserModel, UserInfoModel, UserAddressModel, Admin
+from service.user_info import UserAccountInfo, UserProfileInfo, AdminInfo
 
 
 class UserRepository(object):
@@ -78,3 +78,35 @@ class UserRepository(object):
                 .first()
             convert = Convert(user, UserAccountInfo)
         return convert.convert()
+
+    def get_admin_by_id(self, admin_id: int):
+        with book_store_db.session as session:
+            admin = session.query(Admin) \
+                .filter(Admin.admin_id == admin_id) \
+                .first()
+            if not admin:
+                return None
+        return AdminInfo(admin_id=admin.admin_id,
+                         login_id=admin.login_id,
+                         password=admin.password,
+                         salt=admin.salt,
+                         retry=admin.retry,
+                         update_time=admin.update_time,
+                         create_time=admin.create_time,
+                         is_valid=admin.is_valid)
+
+    def get_admin_by_login_id(self, login_id):
+        with book_store_db.session as session:
+            admin = session.query(Admin) \
+                .filter(Admin.login_id == login_id) \
+                .first()
+            if not admin:
+                return None
+            return AdminInfo(admin_id=admin.admin_id,
+                             login_id=admin.login_id,
+                             password=admin.password,
+                             salt=admin.salt,
+                             retry=admin.retry,
+                             update_time=admin.update_time,
+                             create_time=admin.create_time,
+                             is_valid=admin.is_valid)

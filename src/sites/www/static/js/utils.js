@@ -16,6 +16,7 @@ jQuery.fn.formToDict = function() {
 };
 
 function post_form(){
+    // 需要页面包含modal_msg模态框
     var form = $(this).parents("form");
     var args = form.formToDict();
     $.ajax({

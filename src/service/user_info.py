@@ -120,3 +120,31 @@ class UserProfileInfo(object):
         self.update_time = update_time
         self.create_time = create_time
         self.avatar = avatar
+
+
+class AdminInfo(object):
+    def __init__(self,
+                 admin_id,
+                 login_id,
+                 password,
+                 salt,
+                 retry,
+                 update_time,
+                 create_time,
+                 is_valid):
+        self.admin_id = admin_id
+        self.login_id = login_id
+        self.password = password
+        self.salt = salt
+        self.retry = retry
+        self.update_time = update_time
+        self.create_time = create_time
+        self.is_valid = is_valid
+
+
+class AdminLoginInfo(object):
+    def __init__(self,
+                 login_id,
+                 password):
+        self.login_id = login_id
+        self.password = password
