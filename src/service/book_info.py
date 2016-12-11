@@ -23,3 +23,15 @@ class BookInfo(object):
         self.is_valid = is_valid
         self.update_time = update_time
         self.create_time = create_time
+
+
+class BookBasicInfo(object):
+    def __init__(self,
+                 book_id: int,
+                 name: str,
+                 blurb: str,
+                 cover: str):
+        self.book_id = book_id
+        self.name = name
+        self.blurb = blurb
+        self.cover = cover

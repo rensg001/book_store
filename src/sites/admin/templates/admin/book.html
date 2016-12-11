@@ -1,4 +1,52 @@
 {% extends "base.html" %}
+
 {% block content %}
-<p>管理图书</p>
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-8 col-lg-offset-2">
+            <form role="form" action="{{ reverse_url('admin_book') }}" method="post">
+                <div class="form-group">
+                    <label for="book_name">书名</label>
+                    <input type="text" id="book_name" name="name" class="form-control" placeholder="书名">
+                </div>
+                <div class="form-group">
+                    <label for="blurb">简介</label>
+                    <input type="text" id="blurb" name="blurb" class="form-control" placeholder="简介">
+                </div>
+                <div class="form-group">
+                    <label for="cover">封面</label>
+                    <input id="cover" name="fileupload" type="file" class="file-loading" multiple data-show-upload="false"
+                           data-show-caption="true" placeholder="封面">
+                    <input name="cover" type="hidden">
+                </div>
+                <button type="button" class="btn btn-success form-control btn-book-info">提交</button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block javascript %}
+<script>
+
+    $(function () {
+
+        $("input[name='fileupload']").fileinput({
+            allowedFileExtensions: ["jpg", "png", "gif", "jpeg"],
+            uploadUrl: "/file/upload",
+            uploadAsync: true,
+            showUpload: false, // hide upload button
+            showRemove: false, // hide remove button
+            minFileCount: 1,
+            maxFileCount: 1
+        }).on("filebatchselected", function (event, files) {
+            $("input[name='fileupload']").fileinput("upload");
+        }).on("fileuploaded", function (event, data, id, index) {
+            $("input[name='cover']").val(data.response["data"]["filepath"]);
+        });
+
+        $(".btn-book-info").click(post_form)
+    })
+</script>
 {% endblock %}

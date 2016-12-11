@@ -13,9 +13,10 @@
 </head>
 <body>
     {% import "macros/utils.html" as utils %}
+
     {% include "menu_bar.html" %}
 
-    <div class="container" id="content">
+    <div class="container-fluid" id="content">
         {% block content %}
         {% endblock %}
     </div>

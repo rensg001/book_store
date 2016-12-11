@@ -3,7 +3,9 @@
 
 {%block content%}
         <div class="container">
-                {{ utils.book_cell(blurb="简介", book_name="Python") }}
+                {% for book in book_list %}
+                        {{ utils.book_cell(blurb=book.blurb, book_name=book.name, cover=upload_url(book.cover)) }}
+                {% endfor %}
         </div>
 {%endblock%}
 

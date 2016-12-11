@@ -12,7 +12,7 @@ from sqlalchemy import Column, Integer, String, DateTime, Boolean
 
 
 class Book(Base):
-    __table_name = "book"
+    __tablename__ = "book"
     book_id = Column(Integer, primary_key=True, autoincrement=True)
     name = Column(String(32), nullable=False)
     blurb = Column(String(512), nullable=True)

@@ -16,8 +16,22 @@ class BookRepository(object):
                         cover=book_info.cover,
                         is_valid=book_info.is_valid,
                         update_time=book_info.update_time,
-                        create_tiem=book_info.create_time)
+                        create_time=book_info.create_time)
             session.add(book)
             session.commit()
             book_id = book.book_id
         return book_id
+
+    def get_book_list(self):
+        with book_store_db.session as session:
+            books = session.query(Book).all()
+            book_list = []
+            for book in books:
+                book_list.append(BookInfo(book_id=book.book_id,
+                                          name=book.name,
+                                          blurb=book.blurb,
+                                          cover=book.cover,
+                                          is_valid=book.is_valid,
+                                          update_time=book.update_time,
+                                          create_time=book.create_time))
+        return book_list
