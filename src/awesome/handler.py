@@ -3,8 +3,9 @@
 #
 # Author rsg
 #
+import json
 import os
-from datetime import datetime
+import datetime
 
 from awesome.errors import ERROR_MAP, ErrorEnum
 from awesome.exceptions import UndefinedError
@@ -72,7 +73,19 @@ class BaseRequestHandler(RequestHandler):
         self.write(SuccessMSGResult())
 
     def write_data(self, data):
-        self.write(DataResult(data=data))
+        json_string = json.dumps(DataResult(data), cls=MyJSONEncoder)
+        self.write(json_string)
+
+
+class MyJSONEncoder(json.JSONEncoder):
+    def default(self, o):
+        if isinstance(o, datetime.datetime):
+            return o.strftime(format="%Y-%m-%d %H:%M:%S")
+        elif isinstance(o, datetime.date):
+            return o.strftime(format="%Y-%m-%d")
+        elif hasattr(o, "__dict__"):
+            return o.__dict__
+        super(MyJSONEncoder, self).default(o)
 
 
 class FileUploadHandler(BaseRequestHandler):
@@ -83,7 +96,7 @@ class FileUploadHandler(BaseRequestHandler):
 
         file = self.request.files["fileupload"][0]
         filename, file_extension = os.path.splitext(file["filename"])
-        today = datetime.today()
+        today = datetime.datetime.today()
         filename = random_word(20)
         relative_path = today.strftime("%Y/%m/%d")
         fullname = filename+file_extension

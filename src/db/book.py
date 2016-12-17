@@ -6,6 +6,7 @@
 from db.base import book_store_db
 from db.book_model import Book
 from service.book_info import BookInfo
+from sqlalchemy.sql.functions import count
 
 
 class BookRepository(object):
@@ -22,9 +23,18 @@ class BookRepository(object):
             book_id = book.book_id
         return book_id
 
-    def get_book_list(self):
+    def get_list(self, start, page_size, name):
         with book_store_db.session as session:
-            books = session.query(Book).all()
+            total = session.query(count(Book.book_id))\
+                .filter(Book.is_valid)\
+                .filter(Book.name == name if name else True)\
+                .scalar()
+            books = session.query(Book)\
+                .filter(Book.is_valid)\
+                .filter(Book.name == name if name else True)\
+                .offset(start)\
+                .limit(page_size)\
+                .all()
             book_list = []
             for book in books:
                 book_list.append(BookInfo(book_id=book.book_id,
@@ -34,4 +44,4 @@ class BookRepository(object):
                                           is_valid=book.is_valid,
                                           update_time=book.update_time,
                                           create_time=book.create_time))
-        return book_list
+        return book_list, total

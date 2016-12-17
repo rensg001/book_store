@@ -2,13 +2,31 @@
 {% import "macros/utils.html" as utils %}
 
 {%block content%}
-        <div class="container">
-                {% for book in book_list %}
-                        {{ utils.book_cell(blurb=book.blurb, book_name=book.name, cover=upload_url(book.cover)) }}
-                {% endfor %}
+<!--书籍条目，隐藏，用于js初始化图书列表-->
+<div class="platform col-md-4 hide" id="book-demo">
+    <h4>
+        <div class="pictogram">
+            <img src="javascript: avoid(0);" alt="封面">
         </div>
-{%endblock%}
+        <div class="blurb">
+            <a href="javascript: avoid(0);"></a>
+            <small></small>
+        </div>
+    </h4>
+</div>
+
+<div class="container">
+    <div class="row" id="page-content">
+
+    </div>
+    <div class="row page-bottom">
+        <ul id="pagination" class="pagination-md"></ul>
+    </div>
+</div>
+
+{% endblock %}
 
 {% block javascript %}
-
+<script src="{{ static_url('js/jquery.twbsPagination.min.js') }}"></script>
+<script src="{{ static_url('js/index.js') }}"></script>
 {% endblock %}

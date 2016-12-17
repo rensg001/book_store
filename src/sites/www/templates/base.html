@@ -14,10 +14,8 @@
     {% import "macros/utils.html" as utils %}
     {% include "navigation.html" %}
 
-    <div class="container" id="content">
-        {% block content %}
-        {% endblock %}
-    </div>
+    {% block content %}
+    {% endblock %}
 
     {% include "footer.html" %}
     {{ utils.modal_msg(title="系统消息", id="modal_msg", msg="", labelledby="system_msg") }}

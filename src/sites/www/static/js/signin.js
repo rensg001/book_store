@@ -54,7 +54,7 @@ $(function () {
         format: 'yyyy-mm-dd'
     });
 
-    $(".btn-submit").click(post_form);
+    $(".btn-submit").click(act_form);
 
 });
 

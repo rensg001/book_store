@@ -11,6 +11,12 @@
     left: 0;
     text-align: center;
 }
+.page-bottom{
+    position: absolute;
+    bottom: 200px;
+    left: 40%;
+    /*right: 50%;*/
+}
 
 .kv-avatar .file-preview-frame, .kv-avatar .file-preview-frame:hover {
     margin: 0;

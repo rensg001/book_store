@@ -5,6 +5,7 @@
 #
 from datetime import datetime
 
+from awesome.utils.pagination import Pagination
 from db.book import BookRepository
 from service.book_info import BookBasicInfo, BookInfo
 
@@ -24,5 +25,8 @@ class BookService(object):
                              create_time=now)
         return self.book_repository.create(book_info)
 
-    def get_book_list(self):
-        return self.book_repository.get_book_list()
+    def get_list(self, page, page_size, name=None):
+        paging = Pagination(page, page_size)
+        book_list, total = self.book_repository.get_list(paging.start, paging.page_size, name)
+        total_page = total // page_size + (1 if total % page_size else 0)
+        return book_list, total_page
