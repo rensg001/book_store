@@ -74,6 +74,7 @@ class BaseRequestHandler(RequestHandler):
 
     def write_data(self, data):
         json_string = json.dumps(DataResult(data), cls=MyJSONEncoder)
+        self.set_header("Content-Type", "application/json; charset=UTF-8")
         self.write(json_string)
 
 

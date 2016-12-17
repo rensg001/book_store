@@ -17,7 +17,6 @@ function init_book(cover, book_name, blurb) {
 }
 
 function init_book_list(resp) {
-    var resp = JSON.parse(resp);
     var list = resp.data.list;
     $("#page-content").empty();
     for (var index in list) {
@@ -42,7 +41,6 @@ $pagination.twbsPagination(defaultOpts);
 
 function init_paginator(resp) {
     init_book_list(resp);
-    var resp = JSON.parse(resp);
     var totalPages = resp.data.total_page;
     var currentPage = $pagination.twbsPagination('getCurrentPage');
 
