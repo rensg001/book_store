@@ -3,8 +3,12 @@
 #
 # Author rsg
 #
+import logging
+
 from service.book import BookService
 from sites.www.handlers.handler import UserRequestHandler
+
+logger = logging.getLogger(__name__)
 
 
 class MainHandler(UserRequestHandler):
@@ -19,6 +23,7 @@ class MainListHandler(UserRequestHandler):
         name = self.get_argument("name", None)
         page = int(page)
         page_size = int(page_size)
+        logger.info("page:{page}, page_size:{page_size}, name:{name}".format(page=page, page_size=page_size, name=name if name else ""))
         book_list, total_page = BookService().get_list(page, page_size, name)
         for book in book_list:
             book.cover = self.upload_url(book.cover)
