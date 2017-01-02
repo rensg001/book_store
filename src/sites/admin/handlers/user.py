@@ -37,4 +37,5 @@ class LoginHandler(AdminRequestHandler):
 class LogoutHandler(AdminRequestHandler):
     def get(self):
         self.clear_all_cookies()
-        return self.write_success()
+        return self.redirect(self.reverse_url(name="login"))
+        # return self.write_success()

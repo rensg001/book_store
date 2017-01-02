@@ -56,8 +56,8 @@ if __name__ == "__main__":
     read_config_file(config_path)
 
     parser = argparse.ArgumentParser()
-    parser.add_argument("--login_id", help="admin user login_id.")
-    parser.add_argument("--password", help="admin user password.")
+    parser.add_argument("login_id", help="admin user login_id.")
+    parser.add_argument("password", help="admin user password.")
     args = parser.parse_args()
 
     admin_manager = AdminManager(login_id=args.login_id, password=args.password)

@@ -14,4 +14,5 @@ class ErrorEnum(Enum):
 
 ERROR_MAP = {
     ErrorEnum.login_failure.value: "用户名或密码错误",
+    ErrorEnum.argument_error.value: "参数错误"
 }

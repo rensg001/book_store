@@ -15,6 +15,11 @@ nav.sidebar, .main {
 
 ul.nav.navbar-nav {
     width: 100%;
+    font-size: 17px;
+}
+
+ul.nav.navbar-nav > ul{
+    font-size: 16px;
 }
 
 @media (min-width: 765px) {

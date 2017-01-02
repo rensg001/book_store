@@ -13,5 +13,6 @@ handlers = [
     url(r"/logout", user.LogoutHandler, name="logout"),
     url(r"/file/upload", FileUploadHandler, name="file_upload"),
 
-    url(r"/admin/book", book.BookHandler, name="admin_book")
+    url(r"/admin/book", book.BookHandler, name="admin_book"),
+    url(r"/admin/book/detail", book.BookDetailHandler, name="admin_book_detail")
 ]

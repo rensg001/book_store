@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-lg-8 col-lg-offset-2">
+            <form role="form" action="{{ reverse_url('admin_book_detail') }}" method="post">
+                <input type="button" class="btn-success btn btn-book-detail" value="提交">
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -25,8 +25,15 @@ class BookService(object):
                              create_time=now)
         return self.book_repository.create(book_info)
 
+    def create_detail(self, book_detail_info):
+        self.book_repository.create_detail(book_detail_info)
+
     def get_list(self, page, page_size, name=None):
         paging = Pagination(page, page_size)
         book_list, total = self.book_repository.get_list(paging.start, paging.page_size, name)
         total_page = total // page_size + (1 if total % page_size else 0)
         return book_list, total_page
+
+    def get_detail(self, book_id):
+        detail_info = self.book_repository.get_one(book_id)
+        return detail_info

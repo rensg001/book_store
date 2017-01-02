@@ -63,6 +63,8 @@ class UserService(object):
 
     def get_admin_by_id(self, admin_id: int):
         admin = self.user_repository.get_admin_by_id(admin_id)
+        if not admin:
+            return admin
         del admin.retry
         del admin.password
         del admin.is_valid

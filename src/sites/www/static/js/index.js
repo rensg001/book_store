@@ -18,15 +18,19 @@ function init_book(cover, book_name, blurb) {
 
 function init_book_list(resp) {
     var list = resp.data.list;
-    $("#page-content").empty();
-    for (var index in list) {
-        var book = list[index];
-        if (book.hasOwnProperty("cover")
-            && book.hasOwnProperty("name")
-            && book.hasOwnProperty("blurb")) {
-            init_book(book.cover, book.name, book.blurb);
+    if (list.length > 0) {
+        $("#page-content-container").removeClass("hide");
+        $("#page-content").empty();
+        for (var index in list) {
+            var book = list[index];
+            if (book.hasOwnProperty("cover")
+                && book.hasOwnProperty("name")
+                && book.hasOwnProperty("blurb")) {
+                init_book(book.cover, book.name, book.blurb);
+            }
         }
     }
+
 }
 
 var $pagination = $("#pagination");
@@ -36,7 +40,7 @@ var defaultOpts = {
     prev: "上一页",
     next: "下一页"
 };
-var page_size = "2";
+var page_size = "20";
 $pagination.twbsPagination(defaultOpts);
 
 function init_paginator(resp) {
