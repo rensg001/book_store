@@ -8,6 +8,9 @@ import json
 import ssl
 import urllib.request, sys
 
+from tornado import gen
+from tornado.httpclient import AsyncHTTPClient, HTTPRequest
+
 
 class OcrVehicleApi(object):
     def __init__(self, host, path, file_path, app_key=None, app_secret=None, app_code=None,
@@ -31,6 +34,7 @@ class OcrVehicleApi(object):
         self._ctx = ssl.create_default_context()
         self._ctx.check_hostname = False
         self._ctx.verify_mode = ssl.CERT_NONE
+        self._http_client = AsyncHTTPClient()
 
     def get_header(self):
         headers = {}
@@ -47,22 +51,28 @@ class OcrVehicleApi(object):
 
     def make_request(self):
         headers = self.get_header()
-        return urllib.request.Request(self._url,
-                                      data=self._body_json.encode("utf8"),
-                                      headers=headers)
+        # return urllib.request.Request(self._url,
+        #                               data=self._body_json.encode("utf8"),
+        #                               headers=headers)
+        return HTTPRequest(self._url,
+                           method="POST",
+                           headers=headers,
+                           body=self._body_json.encode("utf8"),
+                           ssl_options=self._ctx)
 
+    @gen.coroutine
     def do_request(self):
         request = self.make_request()
-        resp = urllib.request.urlopen(request, context=self._ctx)
-        content = resp.read()
-        if content:
-            print(content)
+        # resp = urllib.request.urlopen(request)
+        resp = yield self._http_client.fetch(request)
+        content = resp.body
+        raise gen.Return(content)
 
-ocr_vehicle_api = OcrVehicleApi(
-        host="https://dm-53.data.aliyun.com",
-        path="/rest/160601/ocr/ocr_vehicle.json",
-        file_path="/Users/renshangui/commitizen.json",
-        app_code="12641a9e338c467db865c1453c76d8e1"
-    )
-
-ocr_vehicle_api.do_request()
+# ocr_vehicle_api = OcrVehicleApi(
+#         host="https://dm-53.data.aliyun.com",
+#         path="/rest/160601/ocr/ocr_vehicle.json",
+#         file_path="/Users/renshangui/commitizen.json",
+#         app_code="12641a9e338c467db865c1453c76d8e1"
+#     )
+#
+# ocr_vehicle_api.do_request()

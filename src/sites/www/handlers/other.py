@@ -4,7 +4,6 @@
 # Author rsg
 #
 import json
-import logging
 import tornado.web
 
 
