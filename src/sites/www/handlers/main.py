@@ -24,6 +24,7 @@ class MainListHandler(UserRequestHandler):
         page = int(page)
         page_size = int(page_size)
         logger.info("page:{page}, page_size:{page_size}, name:{name}".format(page=page, page_size=page_size, name=name if name else ""))
+        logger.info("session username: %s" % self.session["username"])
         book_list, total_page = BookService().get_list(page, page_size, name)
         for book in book_list:
             book.cover = self.upload_url(book.cover)

@@ -4,6 +4,7 @@
 # Author rsg
 #
 import queue
+import random
 
 
 class BinaryNode(object):
@@ -305,11 +306,30 @@ def delete(tree, node):
 
     return tree
 
+exist_data = []
+
+
+def add_exist_data(node):
+    exist_data.append(node.data)
+
 
 def main():
-    binary_root = insert(None, BinaryNode(3))
-    for key in [1, 4, 6, 9, 2, 5, 7]:
+    seq = [i for i in range(0, 9999)]
+    random_list = []
+    for j in range(0, 9999):
+        random_list.append(random.choice(seq))
+
+    binary_root = insert(None, BinaryNode(random_list.pop(0)))
+    for key in random_list:
         insert(binary_root, BinaryNode(key))
+
+
+    binary_root.traverse_bf(add_exist_data)
+    insert_list = []
+    delete_list = []
+
+    for n in range(0, 99999):
+        delete_list
 
     delete(binary_root, BinaryNode(10))
     a = 1

@@ -27,6 +27,8 @@ class LoginHandler(BaseRequestHandler):
         self.set_secure_cookie(name=options.USER_COOKIE_NAME,
                                value="{0}".format(login_ret),
                                expires_days=None)
+        user_info = UserService().get_profile_by_id(login_ret)
+        self.session["username"] = user_info.name
         return self.write_success()
 
 

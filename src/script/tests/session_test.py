@@ -15,11 +15,13 @@ import tornado.web
 
 logging.basicConfig(level=logging.INFO)
 
+
 class SessionData(dict):
     def __init__(self, sesison_id, hmac_key, **kwargs):
         self.session_id = sesison_id
         self.hmac_key = hmac_key
         super(SessionData, self).__init__(**kwargs)
+
 
 class Session(SessionData):
     def __init__(self, session_manager, request_handler):
@@ -50,14 +52,15 @@ class SessionManager(object):
         try:
             if "pass" in options:
                 self.redis = redis.StrictRedis(host=options["host"],
-                                           port=options["port"],
-                                           password=options["pass"])
+                                               port=options["port"],
+                                               password=options["pass"])
             else:
                 self.redis = redis.StrictRedis(host=options["host"],
                                                port=options["port"])
         except Exception as e:
             logging.info("connect to redis server failed.")
             raise e
+
     def _fetch(self, session_id):
         try:
             session_data = raw_data = self.redis.get(session_id)
@@ -85,8 +88,8 @@ class SessionManager(object):
         else:
             session_exist = True
 
-        check_hamc = self._generate_hmac(session_id)
-        if hmac_key != check_hamc:
+        check_hmac = self._generate_hmac(session_id)
+        if hmac_key != check_hmac:
             raise InvalidSessionException()
 
         session = SessionData(session_id, hmac_key)
@@ -103,12 +106,13 @@ class SessionManager(object):
         self.redis.setex(session.session_id, self.timeout, raw_data)
 
     def _generate_id(self):
-        msg = self.secret+str(uuid.uuid4())
+        msg = self.secret + str(uuid.uuid4())
         new_id = hashlib.sha256(msg.encode("utf8"))
         return new_id.digest()
 
     def _generate_hmac(self, session_id):
         return hmac.new(self.secret.encode("utf8"), session_id, hashlib.sha256).digest()
+
 
 class BaseHandler(tornado.web.RequestHandler):
     def __init__(self, *args, **kwargs):
@@ -116,7 +120,8 @@ class BaseHandler(tornado.web.RequestHandler):
         self.session = Session(SessionManager("mysecret",
                                               {
                                                   "host": "127.0.0.1",
-                                                  "port": 6379,}, 180), self)
+                                                  "port": 6379, }, 180), self)
+
 
 class TestHandler(BaseHandler):
     def get(self):
@@ -131,6 +136,7 @@ class OtherHandler(BaseHandler):
         self.write("get your id %s" % self.session["id"])
         self.finish()
 
+
 def main():
     handlers = [
         (r"/", TestHandler),
@@ -140,6 +146,7 @@ def main():
     server = HTTPServer(app)
     server.listen(8888)
     IOLoop.current().start()
+
 
 if __name__ == "__main__":
     main()

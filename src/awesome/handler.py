@@ -9,6 +9,7 @@ import datetime
 
 from awesome.errors import ERROR_MAP, ErrorEnum
 from awesome.exceptions import UndefinedError
+from awesome.session import Session, SessionManager
 from awesome.utils.random_str import random_word
 from tornado.options import options
 from tornado.web import RequestHandler
@@ -60,6 +61,23 @@ class DataResult(dict):
 
 
 class BaseRequestHandler(RequestHandler):
+
+    @property
+    def session(self):
+        if hasattr(self, "_session"):
+            return getattr(self, "_session")
+
+        options = {
+            "host": "127.0.0.1",
+            "port": 6379,
+            "db": 0
+        }
+        self._session = Session(SessionManager(secret="viejfhk12djfjk64",
+                                               options=options,
+                                               timeout=180),
+                                self)
+        return self._session
+
     def write_error_msg(self, code: int, msg=None):
         if not msg:
             error_msg = ERROR_MAP.get(code)
@@ -100,7 +118,7 @@ class FileUploadHandler(BaseRequestHandler):
         today = datetime.datetime.today()
         filename = random_word(20)
         relative_path = today.strftime("%Y/%m/%d")
-        fullname = filename+file_extension
+        fullname = filename + file_extension
         path = os.path.join(options.FILE_UPLOAD_ROOT, relative_path)
         if not os.path.exists(path):
             os.makedirs(path)
